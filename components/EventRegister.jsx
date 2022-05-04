@@ -10,10 +10,9 @@ export default function EventRegister({ start, end, description, id, title }) {
     setState({ ...state, [e.target.name]: e.target.value })
   }
   const handleSubmit = async e => {
-    setLoading(true)
-
     e.preventDefault()
-    const resp = await fetch("/api/participants", { method: "POST", body: JSON.stringify(state) })
+    setLoading(true)
+    const resp = await fetch("/api/participants", { method: "POST", body: JSON.stringify(state), headers: { "Content-Type": "application/json" } })
     const data = await resp.json()
     setParticipant(data.participant)
     setLoading(false)
@@ -31,7 +30,7 @@ export default function EventRegister({ start, end, description, id, title }) {
               ) : (
                 <Stack component="form" onSubmit={handleSubmit} direction={"row"} spacing={2} alignItems="center" justifyContent={"center"} p={6}>
                   <TextField label="Name" size="small" required value={state.name} onChange={handleChange} name="name" />
-                  <TextField label="Email" size="small" required value={state.email} onChange={handleChange} name="email" />
+                  <TextField label="Email" type="email" size="small" required value={state.email} onChange={handleChange} name="email" />
 
                   <Button disabled={loading} variant="contained" type="submit">
                     {loading && <CircularProgress size={20} />} Join Now!

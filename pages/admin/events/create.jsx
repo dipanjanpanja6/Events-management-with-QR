@@ -19,10 +19,9 @@ export default function Create({ events }) {
     try {
       e.preventDefault()
       setLoading(true)
-      const resp = await fetch("/api/events", { method: "POST", body: JSON.stringify(state) })
+      const resp = await fetch("/api/events", { method: "POST", body: state, headers: { "Content-Type": "application/json" } })
       const data = await resp.json()
       setLoading(false)
-      console.log(data.event)
       if (data.event) router.push(`/admin/events/${data.event.id}`)
       else window.alert(JSON.stringify(data))
     } catch (r) {

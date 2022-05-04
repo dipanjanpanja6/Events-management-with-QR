@@ -19,9 +19,5 @@ export default function Calender({ events }) {
 }
 export const getServerSideProps = async ({ params }) => {
   const events = await getEventsData()
-  console.log(events)
-  // if (!events) {
-  //   return { notFound: true }
-  // }
   return { props: JSON.parse(JSON.stringify({ events })) }
 }

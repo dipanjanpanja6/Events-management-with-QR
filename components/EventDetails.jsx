@@ -1,19 +1,13 @@
-import { Share } from "@mui/icons-material"
-import { Grid, IconButton, Stack, Typography } from "@mui/material"
-import React, { useEffect, useState } from "react"
-import QRCode from "react-qr-code"
+import { Grid, Stack, Typography } from "@mui/material"
+import React from "react"
 import { fDateTime } from "../utils/fDateTime"
+import ShareEvent from "./ShareEvent"
 
 export default function EventDetails({ title, start, end, description, id, ...props }) {
-  const [qr, setQr] = useState("")
-  useEffect(() => {
-    setQr(`${window.location.origin}/admin/events/${id}`)
-  }, [])
-
   return (
     <Grid container bgcolor={"#fff"} height={1} alignItems="center">
       <Grid item md={3} p={6} justifyContent="center" display={"flex"}>
-        <QRCode value={qr} />
+        <img src={`/api/qrcode/${id}`} />
       </Grid>
       <Grid item md={9} p={6}>
         <Typography variant="h4" gutterBottom>
@@ -23,9 +17,7 @@ export default function EventDetails({ title, start, end, description, id, ...pr
           {fDateTime(start)} to {fDateTime(end)}
         </Typography>
         <Stack direction="row">
-          <IconButton>
-            <Share />
-          </IconButton>
+          <ShareEvent event_id={id} />
         </Stack>
         <Typography variant="caption" color="text.secondary">
           {description}

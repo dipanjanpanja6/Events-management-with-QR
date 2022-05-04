@@ -14,7 +14,6 @@ export const getEventsData = async () => {
 export const getEventData = async id => {
   const knex = getKnex()
   const event = await knex("events").where({ id }).first()
-  console.log(event)
   if (!event) {
     return null
   }
@@ -25,7 +24,7 @@ export const getEventData = async id => {
 export default async function handler(req, res) {
   try {
     if (req.method === "POST") {
-      const { title, start, end, description } = JSON.parse(req.body)
+      const { title, start, end, description } = req.body
       const knex = getKnex()
       const event = await (await knex("events").insert({ title, start, end, description }).returning("*"))[0]
       res.status(200).json({ event })

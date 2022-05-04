@@ -1,7 +1,8 @@
-import React from "react"
-import { Box, Button, Card, CardActions, CardContent, Chip, IconButton, Stack, Typography } from "@mui/material"
+import React, { useEffect, useState } from "react"
+import { Box, Button, Card, CardActions, CardContent, Chip, Typography } from "@mui/material"
 import { fDateTime } from "../utils/fDateTime"
 import Countdown from "react-countdown"
+import ShareEvent from "./ShareEvent"
 
 export default function EventCard({ title, start, end, description, id }) {
   return (
@@ -30,7 +31,7 @@ export default function EventCard({ title, start, end, description, id }) {
         <Button size="small" href={`/admin/events/${id}`}>
           View
         </Button>
-        <Button size="small">Share</Button>
+        <ShareEvent event_id={id} text={"Share"} />
       </CardActions>
     </Card>
   )

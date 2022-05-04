@@ -11,9 +11,9 @@ export default function Login({ setAuthenticate }) {
   }
   const handleLogin = e => {
     e.preventDefault()
-    console.log(state, Data.admins)
     const authenticate = Data.admins.find(admin => admin.id === state.id && admin.password === state.password)
     if (!authenticate) return window.alert("Invalid user")
+    sessionStorage.setItem("token", JSON.stringify(authenticate))
     setAuthenticate(true)
   }
   return (
