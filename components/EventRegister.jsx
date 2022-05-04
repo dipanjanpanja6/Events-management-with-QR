@@ -1,8 +1,8 @@
+import { Alert, Button, CircularProgress, Stack, TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
 import Countdown from "react-countdown"
-import { Alert, Box, Button, Card, CircularProgress, Divider, Stack, TextField, Typography } from "@mui/material"
 
-export default function EventRegister({ start, end, description, id, title }) {
+export default function EventRegister({ start, end, description, id, title, onSubmitSuccess }) {
   const [state, setState] = useState({ name: "", email: "", event_id: id })
   const [loading, setLoading] = useState(false)
   const [participant, setParticipant] = useState()
@@ -10,12 +10,18 @@ export default function EventRegister({ start, end, description, id, title }) {
     setState({ ...state, [e.target.name]: e.target.value })
   }
   const handleSubmit = async e => {
-    e.preventDefault()
-    setLoading(true)
-    const resp = await fetch("/api/participants", { method: "POST", body: JSON.stringify(state), headers: { "Content-Type": "application/json" } })
-    const data = await resp.json()
-    setParticipant(data.participant)
-    setLoading(false)
+    try {
+      e.preventDefault()
+      setLoading(true)
+      const resp = await fetch("/api/participants", { method: "POST", body: JSON.stringify(state), headers: { "Content-Type": "application/json" } })
+      const data = await resp.json()
+      setParticipant(data.participant)
+      onSubmitSuccess()
+      setLoading(false)
+    } catch (r) {
+      setLoading(false)
+      console.error(r)
+    }
   }
   return (
     <Stack>

@@ -1,9 +1,9 @@
-import * as React from "react"
+import { ListItemButton, ListItemIcon, Stack } from "@mui/material"
 import Divider from "@mui/material/Divider"
 import ListItemText from "@mui/material/ListItemText"
 import Typography from "@mui/material/Typography"
-import { ListItemButton, ListItemIcon, Stack } from "@mui/material"
 import { useRouter } from "next/router"
+import * as React from "react"
 import { fDateTime } from "../utils/fDateTime"
 
 export default function EventItem({ title, id, start, end, description }) {

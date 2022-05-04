@@ -1,10 +1,10 @@
-import * as React from "react"
+import { Logout } from "@mui/icons-material"
+import { IconButton } from "@mui/material"
 import MuiAppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
-import { IconButton } from "@mui/material"
 import { useRouter } from "next/router"
-import { Logout } from "@mui/icons-material"
+import * as React from "react"
 
 export default function PrimaryAppBar({ title, children }) {
   const router = useRouter()

@@ -1,12 +1,12 @@
-import React from "react"
+import { CacheProvider } from "@emotion/react"
 import "@fullcalendar/common/main.css"
 import "@fullcalendar/daygrid/main.css"
 import "@fullcalendar/timegrid/main.css"
-import { CacheProvider } from "@emotion/react"
-import { ThemeProvider, CssBaseline } from "@mui/material"
-import createEmotionCache from "../utils/createEmotionCache"
-import lightTheme from "../styles/theme"
+import { CssBaseline, ThemeProvider } from "@mui/material"
+import React from "react"
 import "../styles/globals.css"
+import lightTheme from "../styles/theme"
+import createEmotionCache from "../utils/createEmotionCache"
 
 const clientSideEmotionCache = createEmotionCache()
 

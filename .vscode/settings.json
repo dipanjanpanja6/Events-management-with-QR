@@ -1,0 +1,12 @@
+{
+  "javascript.validate.enable": true,
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/node_modules": true
+  },
+
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

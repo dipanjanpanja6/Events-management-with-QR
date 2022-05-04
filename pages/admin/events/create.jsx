@@ -1,11 +1,11 @@
-import React, { useState } from "react"
 import FullCalendar from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import timeGridPlugin from "@fullcalendar/timegrid"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import AuthLayout from "../../../Layouts/AuthLayout"
-import { Box, Button, Grid, TextField, Typography, Paper, CircularProgress } from "@mui/material"
+import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } from "@mui/material"
 import { useRouter } from "next/router"
+import React, { useState } from "react"
+import AuthLayout from "../../../Layouts/AuthLayout"
 import { getEventsData } from "../../api/events"
 
 export default function Create({ events }) {
@@ -19,13 +19,14 @@ export default function Create({ events }) {
     try {
       e.preventDefault()
       setLoading(true)
-      const resp = await fetch("/api/events", { method: "POST", body: state, headers: { "Content-Type": "application/json" } })
+      const resp = await fetch("/api/events", { method: "POST", body: JSON.stringify(state), headers: { "Content-Type": "application/json" } })
       const data = await resp.json()
       setLoading(false)
       if (data.event) router.push(`/admin/events/${data.event.id}`)
       else window.alert(JSON.stringify(data))
     } catch (r) {
       console.log(r)
+      window.alert(r)
       setLoading(false)
     }
   }

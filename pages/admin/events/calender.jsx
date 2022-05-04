@@ -1,16 +1,12 @@
-import React, { useRef, useState } from "react"
 import FullCalendar from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import timeGridPlugin from "@fullcalendar/timegrid"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import { getEventsData } from "../../api/events"
 import { Box } from "@mui/material"
+import React from "react"
+import { getEventsData } from "../../api/events"
 
 export default function Calender({ events }) {
-  const calendarRef = useRef(null)
-  const [date, setDate] = useState(new Date())
-  const [view, setView] = useState("dayGridMonth")
-
   return (
     <Box p={2} height="100vh">
       <FullCalendar plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]} initialView="dayGridMonth" nowIndicator weekends editable={false} events={events} height={"100%"} />

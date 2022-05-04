@@ -6,7 +6,7 @@ export default function AuthLayout(props) {
   const [authenticate, setAuthenticate] = useState(null)
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const token = sessionStorage.getItem("token")
       if (token) setAuthenticate(true)
       else setAuthenticate(false)
