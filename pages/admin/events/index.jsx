@@ -11,6 +11,7 @@ import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
+import moment from "moment"
 import * as React from "react"
 import EventCard from "../../../components/EventCard"
 import EventItem from "../../../components/EventItem"
@@ -67,9 +68,12 @@ export default function Admin({ events }) {
           <>
             <Typography>Upcoming events</Typography>
             <Stack direction="row" m={2}>
-              {events.map(event => (
-                <EventCard key={event.id} {...event} />
-              ))}
+              {events
+                .filter(e => moment(e.start).isAfter())
+                ?.slice(0, 4)
+                ?.map(event => (
+                  <EventCard key={event.id} {...event} />
+                ))}
             </Stack>
 
             <Typography>All events</Typography>

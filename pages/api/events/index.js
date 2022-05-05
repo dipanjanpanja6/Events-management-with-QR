@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getKnex } from "../../knex"
+import { getKnex } from "../../../knex"
 
 export const getEventsData = async () => {
   const knex = getKnex()

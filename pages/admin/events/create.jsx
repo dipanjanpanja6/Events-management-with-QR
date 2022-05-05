@@ -1,12 +1,10 @@
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import interactionPlugin from "@fullcalendar/interaction"
-import timeGridPlugin from "@fullcalendar/timegrid"
-import { Box, Button, CircularProgress, Grid, Paper, TextField, Typography } from "@mui/material"
+import { alpha } from "@mui/material/styles"
+import { Box, Button, CircularProgress, FormControl, Grid, InputBase, InputLabel, Paper, styled, ThemeProvider, Typography } from "@mui/material"
 import { useRouter } from "next/router"
 import React, { useState } from "react"
 import AuthLayout from "../../../Layouts/AuthLayout"
 import { getEventsData } from "../../api/events"
+import Calender from "./calender"
 
 export default function Create({ events }) {
   const router = useRouter()
@@ -14,6 +12,9 @@ export default function Create({ events }) {
   const [loading, setLoading] = useState(false)
   const handleChange = e => {
     setState({ ...state, [e.target.name]: e.target.value })
+  }
+  const handleCancel = () => {
+    router.back()
   }
   const handleSubmit = async e => {
     try {
@@ -34,58 +35,61 @@ export default function Create({ events }) {
     <AuthLayout>
       <Grid container sx={{ minHeight: "100vh" }}>
         <Grid item md={8} p={4} bgcolor={"#fdfdfd"}>
-          <FullCalendar plugins={[interactionPlugin, timeGridPlugin, dayGridPlugin]} initialView="dayGridMonth" nowIndicator weekends editable={false} events={events} height={"100%"} />
+          <Calender events={events} />
         </Grid>
-        <Grid item md={4} component={Paper} elevation={2}>
-          <Typography variant="h6" gutterBottom px={6} pt={6}>
+        <Grid item md={4} component={Paper} elevation={2} sx={{ backgroundColor: "primary.light", color: "white" }}>
+          <Typography variant="h2" fontSize={"1.75em"} fontWeight={"bold"} gutterBottom px={6} pt={6}>
             Create Event
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
             sx={{
-              "& .MuiTextField-root": { m: 1, width: 1 },
+              "& .MuiTextField-root": { m: 1, width: 1, background: "white" },
               p: 6,
             }}
             autoComplete="off">
             <div>
-              <TextField required name="title" label="Event name" value={state.title} onChange={handleChange} />
+              <FormControl variant="standard" sx={{ mb: 2 }} fullWidth>
+                <BootstrapInputLabel htmlFor="bootstrap-input" style={{ color: "#fff" }}>
+                  Event Name
+                </BootstrapInputLabel>
+                <BootstrapInput required name="title" value={state.title} onChange={handleChange} />
+              </FormControl>
               <br />
-              <TextField
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                type="datetime-local"
-                required
-                name="start"
-                label="start Date"
-                value={state.start}
-                onChange={handleChange}
-              />
-              <TextField
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                type="datetime-local"
-                required
-                name="end"
-                label="end date"
-                value={state.end}
-                onChange={handleChange}
-              />
+              <FormControl variant="standard" sx={{ mb: 2 }} fullWidth>
+                <BootstrapInputLabel htmlFor="bootstrap-input" style={{ color: "#fff" }}>
+                  Start date
+                </BootstrapInputLabel>
+                <BootstrapInput type="datetime-local" required name="start" value={state.start} onChange={handleChange} />
+              </FormControl>
+              <FormControl variant="standard" sx={{ mb: 2 }} fullWidth>
+                <BootstrapInputLabel htmlFor="bootstrap-input" style={{ color: "#fff" }}>
+                  End date
+                </BootstrapInputLabel>
+                <BootstrapInput type="datetime-local" required name="end" label="end date" value={state.end} onChange={handleChange} />
+              </FormControl>
               <br />
-              <TextField
-                required
-                name="description"
-                value={state.description}
-                onChange={handleChange}
-                label="Description"
-                multiline
-                minRows={4}
-                sx={{ width: `100% !important`, maxWidth: 700 }}
-              />
+              <FormControl variant="standard" sx={{ mb: 2 }} fullWidth>
+                <BootstrapInputLabel htmlFor="bootstrap-input" style={{ color: "#fff" }}>
+                  Description
+                </BootstrapInputLabel>
+                <BootstrapInput
+                  required
+                  name="description"
+                  value={state.description}
+                  onChange={handleChange}
+                  label="Description"
+                  multiline
+                  minRows={4}
+                  sx={{ width: `100% !important`, maxWidth: 700 }}
+                />
+              </FormControl>
             </div>
-            <Button disabled={loading} variant="contained" sx={{ m: 1 }} type="submit">
+            <Button sx={{ m: 1 }} color="inherit" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button disabled={loading} variant="outlined" sx={{ m: 1 }} color="inherit" type="submit">
               {loading && <CircularProgress size={20} />} Submit
             </Button>
           </Box>
@@ -100,3 +104,30 @@ export const getServerSideProps = async ({ params }) => {
 
   return { props: JSON.parse(JSON.stringify({ events })) }
 }
+
+const BootstrapInputLabel = styled(props => <InputLabel shrink {...props} />)(({ theme }) => ({
+  "& .MuiInputLabel-root": {
+    // marginTop: theme.spacing(2),
+    color: "#fff !important",
+  },
+}))
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  "label + &": {
+    marginTop: theme.spacing(3),
+  },
+  "& .MuiInputBase-input": {
+    width: "100%",
+    borderRadius: 4,
+    position: "relative",
+    backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
+    border: "1px solid #ced4da",
+    fontSize: 16,
+    // width: "auto",
+    padding: "10px 12px",
+    transition: theme.transitions.create(["border-color", "background-color", "box-shadow"]),
+    "&:focus": {
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}))

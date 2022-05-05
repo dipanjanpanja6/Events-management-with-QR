@@ -9,7 +9,7 @@ exports.up = async function (knex) {
     table.increments().primary()
     table.string("email")
     table.string("name")
-    table.integer("event_id").references("id").inTable("events").notNullable()
+    table.integer("event_id").references("id").inTable("events").notNullable().onDelete("CASCADE")
     table.timestamps(true, true)
   })
 }
