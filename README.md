@@ -25,6 +25,8 @@ Then, create .env.local file from `.env.local.example` and update database url
 Then, run :
 
 ```bash
+npm run setup
+#or
 sh ./.script/setup.sh
 ```
 
