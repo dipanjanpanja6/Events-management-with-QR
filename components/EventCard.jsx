@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Box, Button, Card, CardActions, CardContent, Chip, Typography } from "@mui/material"
 import { fDateTime } from "../utils/fDateTime"
 import Countdown from "react-countdown"
@@ -6,7 +6,7 @@ import ShareEvent from "./ShareEvent"
 
 export default function EventCard({ title, start, end, description, id }) {
   return (
-    <Card sx={{ maxWidth: 300, m: 1 }}>
+    <Card sx={{ width: 300, m: 1 }}>
       <CardContent>
         <Box display="flex" justifyContent={"space-between"}>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

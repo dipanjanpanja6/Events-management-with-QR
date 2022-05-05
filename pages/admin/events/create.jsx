@@ -86,10 +86,10 @@ export default function Create({ events }) {
                 />
               </FormControl>
             </div>
-            <Button sx={{ m: 1 }} color="inherit" onClick={handleCancel}>
+            <Button sx={{ m: 1 }} color="inherit" variant="outlined" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button disabled={loading} variant="outlined" sx={{ m: 1 }} color="inherit" type="submit">
+            <Button disabled={loading} variant="contained" sx={{ m: 1, background: "white", color: "primary.light" }} type="submit">
               {loading && <CircularProgress size={20} />} Submit
             </Button>
           </Box>
