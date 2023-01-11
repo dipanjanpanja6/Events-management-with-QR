@@ -857,9 +857,9 @@ color-name@~1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz"
 
-colorette@2.0.16:
-  version "2.0.16"
-  resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.16.tgz"
+colorette@2.0.19:
+  version "2.0.19"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.19.tgz#cdf044f47ad41a0f4b56b3a0d5b4e6e1a2d5a798"
 
 commander@^9.1.0:
   version "9.2.0"
@@ -1655,11 +1655,11 @@ json5@^2.2.1:
     array-includes "^3.1.4"
     object.assign "^4.1.2"
 
-knex@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/knex/-/knex-2.0.0.tgz"
+knex@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-2.4.0.tgz#7d33cc36f320cdac98741010544b4c6a98b8b19e"
   dependencies:
-    colorette "2.0.16"
+    colorette "2.0.19"
     commander "^9.1.0"
     debug "4.3.4"
     escalade "^3.1.1"
